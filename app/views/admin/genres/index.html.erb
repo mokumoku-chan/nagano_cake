@@ -1,0 +1,33 @@
+<% if @genre.errors.any? %>
+  <%= @genre.errors.count %>件のエラーが発生しました。
+  <% @genre.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
+<h2>ジャンル一覧・追加</h2>
+
+<%= form_with model:@genre, url: admin_genres_path, local:true do |f| %>
+
+  ジャンル名
+  <%= f.text_field :name %>
+
+  <%= f.submit "新規登録" %>
+
+<% end %>
+
+
+<table>
+  <tr>
+    <th>ジャンル</th>
+    <th></th>
+  </tr>
+
+  <% @genres.each do |genre| %>
+    <tr>
+      <th><%= genre.name %></th>
+      <th><%= link_to "編集する", edit_admin_genre_path(genre.id) %></th>
+    </tr>
+  <% end %>
+</table>
