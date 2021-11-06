@@ -13,12 +13,17 @@
   ジャンル
   <%= f.collection_select :genre_id, @genres, :id, :name, prompt: "--選択してください--" %><br>
 
-  税抜き価格
+  税抜価格
   <%= f.text_field :price %><br>
 
 
+  販売ステータス
+
   <%= f.radio_button :is_active, :sale %>
-  <%= Item.is_actives[:sale] %>
+  <%= Item.is_actives_i18n[:sale] %>
+
+  <%= f.radio_button :is_active, :stop_selling %>
+  <%= Item.is_actives_i18n[:stop_selling] %><br>
 
   <%= f.submit "新規登録" %>
 
