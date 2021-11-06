@@ -1,3 +1,12 @@
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>件のエラーが発生しました
+  <% @item.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
+
 <h2>商品新規登録</h2>
 
 <%= form_with model:@item, url: admin_items_path, local:true do |f| %>
@@ -11,7 +20,7 @@
   <%= f.text_area :introduction %><br>
 
   ジャンル
-  <%= f.collection_select :genre_id, @genres, :id, :name, prompt: "--選択してください--" %><br>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %><br>
 
   税抜価格
   <%= f.text_field :price %><br>

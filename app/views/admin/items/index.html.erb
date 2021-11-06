@@ -12,7 +12,14 @@
   </tr>
 
   <% @items.each do |item| %>
-    <td><%= item.id %></td>
+    <tr>
+      <td><%= item.id %></td>
+      <td><%= item.name %></td>
+      <td><%= item.price %></td>
+      <td><%= item.genre.name %></td>
+      <td><%= Item.is_actives_i18n[item.is_active] %></td>
+
+    </tr>
 
   <% end %>
 
