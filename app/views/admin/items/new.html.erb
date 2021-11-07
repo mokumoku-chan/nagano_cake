@@ -1,0 +1,39 @@
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>件のエラーが発生しました
+  <% @item.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
+
+<h2>商品新規登録</h2>
+
+<%= form_with model:@item, url: admin_items_path, local:true do |f| %>
+
+  商品画像
+  <%= f.attachment_field :image %><br>
+
+  商品名
+  <%= f.text_field :name %><br>
+  商品説明
+  <%= f.text_area :introduction %><br>
+
+  ジャンル
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %><br>
+
+  税抜価格
+  <%= f.text_field :price %><br>
+
+
+  販売ステータス
+
+  <%= f.radio_button :is_active, :sale %>
+  <%= Item.is_actives_i18n[:sale] %>
+
+  <%= f.radio_button :is_active, :stop_selling %>
+  <%= Item.is_actives_i18n[:stop_selling] %><br>
+
+  <%= f.submit "新規登録" %>
+
+<% end %>
