@@ -1,7 +1,6 @@
 class Admin::ItemsController < ApplicationController
   def index
-    @items = Item.all
-    @genres = Genre.all
+    @items = Item.page(params[:page]).reverse_order
   end
 
   def new
@@ -22,6 +21,29 @@ class Admin::ItemsController < ApplicationController
       render :new
 
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
+  end
+
+
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+
+  def update
+    item = Item.find(params[:id])
+    item.updated_at = Time.now
+
+    if item.update(item_params)
+      redirect_to admin_item_path(item)
+
+    else
+      render :edit
+    end
+
   end
 
 

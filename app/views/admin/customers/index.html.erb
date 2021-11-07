@@ -1,0 +1,23 @@
+<h2>会員一覧</h2>
+
+<table>
+  <tr>
+    <th>会員ID</th>
+    <th>氏名</th>
+    <th>メールアドレス</th>
+    <th>ステータス</th>
+  </tr>
+
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.id %></td>
+      <td><%= customer.name %></td>
+      <td><%= customer.email %></td>
+      <td><%= Customer.is_actives_i18n[customer.is_active] %></td>
+    </tr>
+  </table>
+
+
+  <%= paginate @customers %>
+
+<% end %>
