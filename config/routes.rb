@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
     resources :genres, only: [:index, :new, :create, :edit, :update]
-    resources :customers, only: [:index]
+    resources :customers, only: [:index, :show]
   end
 
   devise_for :admins, controllers: {
