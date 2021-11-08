@@ -9,3 +9,11 @@ ja:
       is_active:
         admission: '有効'
         withdrawal: '退会'
+
+    order:
+      status:
+        waiting: '入金待ち'
+        confirm: '入金確認'
+        production: '製作中'
+        preparation: '発送準備中'
+        sent: '発送済み'

@@ -8,12 +8,23 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/e2c2aeffb7.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
+
     <% if admin_signed_in? %>
 
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+
+    <% else %>
+      <%= link_to "About", about_path %>
+
+      <%= link_to "商品一覧", about_path %>
+
+      <%= link_to "新規登録", new_customer_registration_path %>
+
+      <%= link_to "ログイン", customer_session_path %>
 
     <% end %>
     <%= yield %>

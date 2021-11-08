@@ -6,4 +6,7 @@ class Customer < ApplicationRecord
 
   enum is_active: { admission: true, withdrawal: false}
 
+  has_many :order, dependent: :destroy
+
+
 end
