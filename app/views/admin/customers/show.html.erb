@@ -1,47 +1,60 @@
-<h4><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h4>
+<div class = "container">
 
-<table>
-  <tr>
-    <td>会員ID</td>
-    <td colspan="2"><%= @customer.id %></td>
-  </tr>
+  <div class = "row mt-4">
+    <h4><%= @customer.last_name + @customer.first_name %>さんの会員詳細</h4>
+  </div>
 
-  <tr>
-    <td>氏名</td>
-    <td colspan="2"><%= @customer.last_name + " " + @customer.first_name %></td>
-  </tr>
+  <table class = "table table-borderless my-4">
+    <tr>
+      <td>会員ID</td>
+      <td colspan="2"><%= @customer.id %></td>
+    </tr>
 
-  <tr>
-    <td>フリガナ</td>
-    <td colspan="2"><%= @customer.last_name_kana + " " + @customer.first_name_kana %></td>
-  </tr>
+    <tr>
+      <td>氏名</td>
+      <td colspan="2"><%= @customer.last_name + " " + @customer.first_name %></td>
+    </tr>
 
-  <tr>
-    <td>郵便番号</td>
-    <td colspan="2"><%= @customer.postal_code %></td>
-  </tr>
+    <tr>
+      <td>フリガナ</td>
+      <td colspan="2"><%= @customer.last_name_kana + " " + @customer.first_name_kana %></td>
+    </tr>
 
-  <tr>
-    <td>住所</td>
-    <td colspan="2"><%= @customer.address %></td>
-  </tr>
+    <tr>
+      <td>郵便番号</td>
+      <td colspan="2"><%= @customer.postal_code %></td>
+    </tr>
 
-  <tr>
-    <td>電話番号</td>
-    <td colspan="2"><%= @customer.telephone_number %></td>
-  </tr>
+    <tr>
+      <td>住所</td>
+      <td colspan="2"><%= @customer.address %></td>
+    </tr>
 
-  <tr>
-    <td>メールアドレス</td>
-    <td colspan="2"><%= @customer.email %></td>
-  </tr>
+    <tr>
+      <td>電話番号</td>
+      <td colspan="2"><%= @customer.telephone_number %></td>
+    </tr>
 
-  <tr>
-    <td>会員ステータス</td>
-    <td colspan="2"><%= Customer.is_actives_i18n[@customer.is_active] %></td>
-  </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td colspan="2"><%= @customer.email %></td>
+    </tr>
 
-  <td></td>
-  <td><%= link_to "編集する", edit_admin_customer_path(@customer) %></td>
-  <td><%= link_to "注文履歴一覧を見る", admin_customers_path %></td>
-</table>
+    <tr>
+      <td>会員ステータス</td>
+
+      <% if @customer.is_active == true %>
+        <td class = "text-success">有効</td>
+
+      <% else %>
+        <td>退会</td>
+      <% end %>
+      <!--<td colspan="2"><%#= Customer.is_actives_i18n[@customer.is_active] %></td>-->
+    </tr>
+
+    <td></td>
+    <td><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %></td>
+    <td><%= link_to "注文履歴一覧を見る", admin_customers_path, class: "btn btn-primary"  %></td>
+  </table>
+
+</div>

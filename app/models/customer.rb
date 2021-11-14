@@ -4,7 +4,9 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum is_active: { admission: true, withdrawal: false}
+  validates :is_active, inclusion: {in: [true, false]}
+
+  enum is_active: { admission: 1, withdrawal: 0}
 
   has_many :order, dependent: :destroy
 
