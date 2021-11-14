@@ -5,6 +5,20 @@ Rails.application.routes.draw do
     root to: 'homes#top'
 
     get '/about' => 'homes#about'
+
+    get '/customers/mypage' => 'customers#show'
+    # get '/customers/unsubscribe' => 'customers#unsubscribe'
+    # patch '/customers/withdraw' => 'customers#withdraw'
+
+
+    resource :customers, only: [:show, :edit, :update] do
+
+      collection do
+        get :unsubscribe
+        post :withdraw
+        patch :withdraw
+      end
+    end
   end
 
 
