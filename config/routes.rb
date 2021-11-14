@@ -13,9 +13,9 @@ Rails.application.routes.draw do
 
     resource :customers, only: [:show, :edit, :update] do
 
-      collection do
+      member do
         get :unsubscribe
-        post :withdraw
+        # post :withdraw
         patch :withdraw
       end
     end

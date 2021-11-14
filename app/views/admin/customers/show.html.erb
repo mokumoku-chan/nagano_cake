@@ -42,7 +42,14 @@
 
     <tr>
       <td>会員ステータス</td>
-      <td colspan="2"><%= Customer.is_actives_i18n[@customer.is_active] %></td>
+
+      <% if @customer.is_active == true %>
+        <td class = "text-success">有効</td>
+
+      <% else %>
+        <td>退会</td>
+      <% end %>
+      <!--<td colspan="2"><%#= Customer.is_actives_i18n[@customer.is_active] %></td>-->
     </tr>
 
     <td></td>

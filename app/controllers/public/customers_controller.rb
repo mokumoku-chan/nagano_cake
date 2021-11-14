@@ -22,21 +22,30 @@ class Public::CustomersController < ApplicationController
 
   def unsubscribe
     @customer = Customer.find(current_customer.id)
-  end
 
+  end
 
   def withdraw
-    customer = Customer.find(current_customer.id)
-    p customer
+    current_customer.update(is_active: false)
 
+    reset_session
 
-    if customer.update(is_active: false)
-      # redirect_to destroy_admin_session_path, method: :delete
-      redirect_to customers_mypage_path
-    else
-      redirect_to edit_customers_path
-    end
+    redirect_to root_path
   end
+
+  # # def withdraw
+  # #  customer = Customer.find(current_customer.id)
+  #   # update_time = Time.now()
+
+  #   if customer.update(is_active: false)
+
+  #     redirect_to customers_mypage_path
+
+  #   else
+  #     redirect_to edit_customers_path
+
+  #   end
+  # end
 
 
   private
