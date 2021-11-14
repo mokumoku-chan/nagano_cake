@@ -9,6 +9,8 @@ class Customer < ApplicationRecord
   enum is_active: { admission: 1, withdrawal: 0}
 
   has_many :order, dependent: :destroy
+  has_many :address, dependent: :destroy
+  has_many :cart_item, dependent: :destroy
 
 
 end
