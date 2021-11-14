@@ -1,0 +1,56 @@
+<% if @address.errors.any? %>
+  <%= @address.errors.count %>件のエラーが発生しました
+  <% @address.errors.full_messages.each do |address| %>
+    <%= address %>
+  <% end %>
+<% end %>
+
+
+
+<div class = "container">
+  <h4>配送先登録/一覧</h4>
+
+  <%= form_with model:@address, local:true do |f| %>
+
+    郵便番号(ハイフンなし)
+    <%= f.text_field :postal_code %>
+
+    住所
+    <%= f.text_field :address %>
+
+    宛名
+    <%= f.text_field :name %>
+
+
+    <%= f.submit "新規登録", class: "btn btn-success" %>
+
+  <% end %>
+
+
+  <table class = "table">
+    <thead>
+      <tr>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>宛名</th>
+        <th></th>
+        <th></th>
+      </tr>
+
+        <% @addresses.each do |address| %>
+
+          <tr>
+            <td><%= address.postal_code %></td>
+            <td><%= address.address %></td>
+            <td><%= address.name %></td>
+            <td><%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %></td>
+            <td><%= link_to "削除する", addresses_path, class: "btn btn-danger" %></td>
+          </tr>
+
+        <% end %>
+
+    </thead>
+
+  </table>
+
+</div>

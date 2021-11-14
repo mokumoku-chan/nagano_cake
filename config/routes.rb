@@ -19,6 +19,8 @@ Rails.application.routes.draw do
         patch :withdraw
       end
     end
+
+    resources :addresses, only: [:index, :create, :edit, :update]
   end
 
 
