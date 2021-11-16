@@ -10,7 +10,6 @@ class Public::CustomersController < ApplicationController
 
   def update
     customer = Customer.find(current_customer.id)
-    customer.updated_at = Time.now()
 
     if customer.update(customer_params)
       redirect_to customers_mypage_path
@@ -33,25 +32,11 @@ class Public::CustomersController < ApplicationController
     redirect_to root_path
   end
 
-  # # def withdraw
-  # #  customer = Customer.find(current_customer.id)
-  #   # update_time = Time.now()
-
-  #   if customer.update(is_active: false)
-
-  #     redirect_to customers_mypage_path
-
-  #   else
-  #     redirect_to edit_customers_path
-
-  #   end
-  # end
-
 
   private
     def customer_params
       params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana,
-      :postal_code, :address, :telephone_number, :email, :is_active)
+      :postal_code, :registered_address, :telephone_number, :email, :is_active)
     end
 
 end
