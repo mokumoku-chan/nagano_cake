@@ -1,0 +1,18 @@
+<h4>注文情報入力</h4>
+
+<%= form_with model:@order, url: orders_path, local:true do |f| %>
+支払方法
+
+  <%= f.radio_button :payment_method, 0 %>
+  <%= f.radio_button :payment_method, 1 %>
+
+
+お届け先
+  ご自身の住所
+
+    〒<%= @customer.postal_code +  @customer.registered_address  + @customer.last_name +  @customer.first_name %>
+
+  登録済み住所から選択
+
+  新しいお届け先
+<% end %>

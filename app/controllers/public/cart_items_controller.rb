@@ -8,7 +8,7 @@ class Public::CartItemsController < ApplicationController
 
 
   def index
-    @cart_items = CartItem.all()
+    @cart_items = CartItem.where(customer_id: current_customer.id)
   end
 
 
@@ -34,6 +34,6 @@ class Public::CartItemsController < ApplicationController
   private
 
   def cart_item_params
-    params.permit(:item_id, :customer_id, :amount)
+    params.require(:cart_item).permit(:item_id, :customer_id, :amount)
   end
 end

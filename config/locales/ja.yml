@@ -17,3 +17,8 @@ ja:
         production: '製作中'
         preparation: '発送準備中'
         sent: '発送済み'
+
+      payment_method:
+        card: 'クレジットカード'
+        bank: '銀行振込'
+
