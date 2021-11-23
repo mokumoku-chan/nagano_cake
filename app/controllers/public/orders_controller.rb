@@ -56,7 +56,9 @@ class Public::OrdersController < ApplicationController
 
       order_item.save
     end
-  redirect_to cart_items_path
+
+    current_customer.cart_items.destroy_all
+    redirect_to thanks_orders_path
 
   end
 
@@ -66,8 +68,11 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders
-    @order_items = OrderItem.where(order_id: :@orders.id)
-    binding.pry
+  end
+
+  def show
+    @order = Order.find(params[:id])
+    @order_items = OrderItem.where(order_id: @order.id)
   end
 
 
