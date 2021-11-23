@@ -1,5 +1,4 @@
 <div class = "container">
-  <% tax = 1.1 %>
 
 
   <div class = "row">
@@ -15,17 +14,21 @@
 
       <p><%= @item.introduction %></p>
 
-      <% include_tax = @item.price * tax %>
-      <p class = "my-3"><strong>￥<%= include_tax.floor.to_s(:delimited)%>　(税込)</strong></p>
+      <p class = "my-3"><strong>￥<%= @item.with_tax_price.to_s(:delimited)%>　(税込)</strong></p>
 
       <%= form_with model:@new_item, url: cart_items_path, local:true do |f| %>
         <%= f.select :amount, *[1..5], prompt: "個数選択" %>
 
+        <% if customer_signed_in? %>
+          <%= f.hidden_field :item_id, value: @item.id %>
+          <%= f.hidden_field :customer_id, value: current_customer.id %>
 
-        <%= f.hidden_field :item_id, value: @item.id %>
-        <%= f.hidden_field :customer_id, value: current_customer.id %>
+          <%= f.submit "カートに入れる", class: "btn btn-success" %>
 
-        <%= f.submit "カートに入れる", class: "btn btn-success" %>
+        <% else %>
+          <%= link_to "カートに入れる", new_customer_session_path, class: "btn btn-success" %>
+        <% end %>
+
       <% end %>
 
     </div>

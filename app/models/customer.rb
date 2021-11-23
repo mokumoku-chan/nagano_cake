@@ -8,5 +8,8 @@ class Customer < ApplicationRecord
   has_many :address, dependent: :destroy
   has_many :cart_item, dependent: :destroy
 
+  def full_customer_name
+    last_name + ' ' + first_name
+  end
 
 end

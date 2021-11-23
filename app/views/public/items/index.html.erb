@@ -17,7 +17,6 @@
       </table>
     </div>
 
-    <% tax = 1.1 %>
 
     <div class = "col-10">
       <h4 class = "my-4">商品一覧 (全<%= @items.count %>件)</h4>
@@ -29,8 +28,7 @@
             <div class = "row"><%= attachment_image_tag item, :image, :fill, 200, 200, format: 'jpeg' %></div>
             <div class = "row my-4"><%= link_to item.name, item_path(item), class: "text-dark" %></div>
 
-            <% include_tax = item.price * tax %>
-            <div class = "row">￥<%= include_tax.floor.to_s(:delimited)%></div>
+            <div class = "row">￥<%= item.with_tax_price.to_s(:delimited)%></div>
           </div>
         <% end %>
       </div>
