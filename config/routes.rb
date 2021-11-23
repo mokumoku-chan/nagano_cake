@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     resources :items, only: [:index, :show]
-    resources :orders, only: [:new, :create] do
+    resources :orders, only: [:new, :create, :index] do
       collection do
         get :thanks
         post :confirm

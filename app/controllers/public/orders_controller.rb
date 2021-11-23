@@ -1,6 +1,9 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
+    @order_item = OrderItem.new
+
+
     @customer = Customer.find(current_customer.id)
 
   end
@@ -8,6 +11,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = CartItem.where(customer_id: current_customer.id)
+    @order_item = OrderItem.new
 
     if params[:order][:select_address] == "0"
       @order = Order.new(order_params)
@@ -27,18 +31,32 @@ class Public::OrdersController < ApplicationController
 
     else
       @order = Order.new(order_params)
-
-
     end
-
 
   end
 
 
   def create
-    order = Order.new(order_params)
+    @order = Order.new(order_params)
+    @order.status = 0
+    @order.customer_id = current_customer.id
+    @order.save!
 
-    binding.pry
+    cart_items = current_customer.cart_items
+    cart_items.each do |cart_item|
+      order_item = OrderItem.new
+      order_item.item_id = cart_item.item.id
+      order_item.order_id = @order.id
+      order_item.amount = cart_item.amount
+
+      item_price = cart_item.item.price * 1.1
+      order_item.price = item_price.floor
+
+      order_item.production_status = 0
+
+      order_item.save
+    end
+  redirect_to cart_items_path
 
   end
 
@@ -46,15 +64,16 @@ class Public::OrdersController < ApplicationController
   end
 
 
+  def index
+    @orders = current_customer.orders
+    @order_items = OrderItem.where(order_id: :@orders.id)
+    binding.pry
+  end
+
+
   private
     def order_params
-      params.require(:order).permit(:payment_method, :postal_code, :name, :address, :payment,
-      :postage, :status)
+      params.require(:order).permit(:payment_method, :postal_code, :name, :address, :payment, :postage, :status)
     end
-
-    def order_items_params
-      params.require(:order_items).permit(:item_id, :amount, :price)
-    end
-
 
 end

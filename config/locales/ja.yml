@@ -4,12 +4,10 @@ ja:
       is_active:
         sale: '販売中'
         stop_selling: '販売停止中'
-
     customer:
       is_active:
         admission: '有効'
         withdrawal: '退会'
-
     order:
       status:
         waiting: '入金待ち'
@@ -17,7 +15,6 @@ ja:
         production: '製作中'
         preparation: '発送準備中'
         sent: '発送済み'
-
       payment_method:
         card: 'クレジットカード'
         bank: '銀行振込'
