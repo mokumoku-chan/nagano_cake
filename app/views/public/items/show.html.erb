@@ -1,20 +1,22 @@
-<div class = "container">
+<div class = "container my-5">
 
 
   <div class = "row">
 
-    <div class = "col-md-3">
+    <div class = "col-md-2"></div>
+
+    <div class = "col-md-3 offset-md-1">
       <%= attachment_image_tag @item, :image, :fill, 200, 200, format: 'jpeg' %>
     </div>
 
-    <div class = "col-md-8 offset-md-1">
+    <div class = "col-md-5 offset-md-1">
 
 
       <h4 class = "my-2"><strong><%= @item.name %></strong></h4>
 
       <p><%= @item.introduction %></p>
 
-      <p class = "my-3"><strong>￥<%= @item.with_tax_price.to_s(:delimited)%>　(税込)</strong></p>
+      <p class = "my-3 font-weight-bold">￥<%= @item.with_tax_price.to_s(:delimited)%>　(税込)</p>
 
       <%= form_with model:@new_item, url: cart_items_path, local:true do |f| %>
         <%= f.select :amount, *[1..5], prompt: "個数選択" %>
