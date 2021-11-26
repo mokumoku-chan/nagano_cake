@@ -36,9 +36,11 @@
 
         <tr>
           <td>販売ステータス</td>
-
-
-          <td class = "text-success"><%= Item.is_actives_i18n[@item.is_active] %></td>
+            <% if Item.is_actives[@item.is_active] == true %>
+              <td class = "text-success font-weight-bold"><%= Item.is_actives_i18n[@item.is_active] %></td>
+            <% else %>
+              <td class = "text-secondary font-weight-bold"><%= Item.is_actives_i18n[@item.is_active] %></td>
+            <% end %>
         </tr>
       </table>
     </div>

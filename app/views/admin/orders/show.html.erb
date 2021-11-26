@@ -1,0 +1,68 @@
+<div class = "container my-4">
+
+  <h4 class = "font-weight-bold">注文履歴詳細</h4>
+
+  <table class = "table table-borderless">
+    <tr>
+      <th>購入者</th>
+      <td><%= @order.name %></td>
+    </tr>
+
+    <tr>
+      <th>注文日</th>
+      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+    </tr>
+
+    <tr>
+      <th>配送先</th>
+      <td>
+        〒<%= @order.postal_code %>
+        <%= @order.address %>
+        <%= @order.name %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>支払方法</th>
+      <td><%= @order.payment_method_i18n %></td>
+    </tr>
+
+    <tr>
+      <th>注文ステータス</th>
+      <td>
+        <%= form_with model:@order, url: admin_order_path(@order), local:true do |f| %>
+          <%= f.select :status, [[Order.statuses_i18n[:waiting],Order.statuses.key(0)], [Order.statuses_i18n[:confirm],Order.statuses.key(1)],
+          [Order.statuses_i18n[:production],Order.statuses.key(2)], [Order.statuses_i18n[:preparation],Order.statuses.key(3)], [Order.statuses_i18n[:sent],Order.statuses.key(4)]] %>
+
+          <%= f.submit "更新", class: "btn btn-success" %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+
+  <table class = "table">
+    <thead class = "thead-light">
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>製作ステータス</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.item.name %></td>
+          <td><%= order_item.price.to_s(:delimited) %></td>
+          <td><%= order_item.amount %></td>
+          <td><%= (order_item.amount * order_item.price).to_s(:delimited) %></td>
+          <td><%= order_item.production_status_i18n %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

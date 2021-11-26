@@ -43,15 +43,30 @@
 
     <% else %>
 
-      <div class = "text-right my-4">
-        <%= link_to "About", about_path, class: "btn btn-outline-dark mr-3" %>
+      <% path = request.fullpath %>
+      <% if path.include?("admin") %>
+        <div class = "text-right my-4">
+          <%= link_to "About", about_path, class: "btn btn-outline-dark mr-3" %>
 
-        <%= link_to "商品一覧", items_path,  class: "btn btn-outline-dark mr-3" %>
+          <%= link_to "商品一覧", items_path,  class: "btn btn-outline-dark mr-3" %>
 
-        <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark mr-3" %>
+          <%= link_to "新規登録", new_admin_registration_path, class: "btn btn-outline-dark mr-3" %>
 
-        <%= link_to "ログイン", customer_session_path,class: "btn btn-outline-dark mr-4" %>
-      </div>
+          <%= link_to "ログイン", admin_session_path,class: "btn btn-outline-dark mr-4" %>
+        </div>
+
+      <% else %>
+        <div class = "text-right my-4">
+          <%= link_to "About", about_path, class: "btn btn-outline-dark mr-3" %>
+
+          <%= link_to "商品一覧", items_path,  class: "btn btn-outline-dark mr-3" %>
+
+          <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark mr-3" %>
+
+          <%= link_to "ログイン", customer_session_path,class: "btn btn-outline-dark mr-4" %>
+        </div>
+
+      <% end %>
 
     <% end %>
 
