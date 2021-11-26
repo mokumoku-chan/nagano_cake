@@ -44,17 +44,17 @@
       <td>会員ステータス</td>
 
       <% if @customer.is_active == true %>
-        <td class = "text-success">有効</td>
+        <td class = "text-success font-weight-bold">有効</td>
 
       <% else %>
-        <td>退会</td>
+        <td class = "text-primary font-weight-bold">退会</td>
       <% end %>
       <!--<td colspan="2"><%#= Customer.is_actives_i18n[@customer.is_active] %></td>-->
     </tr>
 
     <td></td>
     <td><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %></td>
-    <td><%= link_to "注文履歴一覧を見る", admin_customers_path, class: "btn btn-primary"  %></td>
+    <td><%= link_to "注文履歴一覧を見る", admin_root_path, class: "btn btn-primary"  %></td>
   </table>
 
 </div>

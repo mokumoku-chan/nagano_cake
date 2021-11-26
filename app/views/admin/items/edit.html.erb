@@ -1,53 +1,63 @@
-<div class = "container py-4">
+<div class = "container">
 
   <div class = "row">
-    <h4 class = "bg-light">商品編集</h4>
+    <h4 class = "font-weight-bold">商品編集</h4>
   </div>
 
   <%= form_with model:@item, url: admin_item_path(@item), local:true do |f| %>
 
-    <table class = "table table-borderless">
-      <tr>
-        <td>商品画像</td>
-        <td><%= f.attachment_field :image %></td>
-      </tr>
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">商品画像</div>
+      <div class = "col-md-6">
+        <%= f.attachment_field :image %>
+      </div>
+    </div>
 
-      <tr>
-        <td>商品名</td>
-        <td><%= f.text_field :name %></td>
-      </tr>
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">商品名</div>
+      <div class = "col-md-6">
+        <%= f.text_field :name, :size=>"40" %>
+      </div>
+    </div>
 
-      <tr>
-        <td>商品説明</td>
-        <td><%= f.text_area :introduction %></td>
-      </tr>
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">商品説明</div>
+      <div class = "col-md-6">
+        <%= f.text_area :introduction, :size=>"40" %>
+      </div>
+    </div>
 
-      <tr>
-        <td>ジャンル</td>
-        <td><%= f.collection_select :genre_id, Genre.all, :id, :name %></td>
-      </tr>
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">ジャンル</div>
+      <div class = "col-md-6">
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %>
+      </div>
+    </div>
 
-      <tr>
-        <td>税抜価格</td>
-        <td><%= f.text_field :price %>円</td>
-      </tr>
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">税抜価格</div>
+      <div class = "col-md-6">
+        <%= f.text_field :price, :size=>"40" %>
+      </div>
+    </div>
 
-      <tr>
-        <td>販売ステータス</td>
-        <td>
-          <%= f.radio_button :is_active, :sale %>
-          <%= Item.is_actives_i18n[:sale] %>
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">販売ステータス</div>
+      <div class = "col-md-6">
 
-          <%= f.radio_button :is_active, :stop_selling, class: "ml-3" %>
-          <%= Item.is_actives_i18n[:stop_selling] %>
-        </td>
-      </tr>
+        <%= f.radio_button :is_active, :sale %>
+        <%= Item.is_actives_i18n[:sale] %>
 
-    </table>
+        <%= f.radio_button :is_active, :stop_selling %>
+        <%= Item.is_actives_i18n[:stop_selling] %>
+      </div>
+    </div>
 
-  <div class = "row">
-    <%= f.submit "変更を保存", class: "btn btn-success mx-auto" %>
-  </div>
+    <div class = "row mb-3">
+      <div class = "col-md-6 offset-md-4">
+        <%= f.submit "変更を保存", class: "btn btn-success mx-auto" %>
+      </div>
+    </div>
 
   <% end %>
 </div>
