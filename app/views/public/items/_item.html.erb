@@ -1,0 +1,8 @@
+<% items.each do |item| %>
+  <div class = "col-3">
+    <%= link_to (attachment_image_tag item, :image, :fill, 200, 200, format: 'jpeg'), item_path(item) %><br>
+    <%= link_to item.name, item_path(item), class: "text-dark" %><br>
+
+    ￥<%= item.with_tax_price.to_s(:delimited) %>
+  </div>
+<% end %>

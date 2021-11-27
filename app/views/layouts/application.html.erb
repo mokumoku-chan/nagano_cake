@@ -56,7 +56,7 @@
         </div>
 
       <% else %>
-        <div class = "text-right my-4">
+        <div class = "text-right mt-4 mb-3">
           <%= link_to "About", about_path, class: "btn btn-outline-dark mr-3" %>
 
           <%= link_to "商品一覧", items_path,  class: "btn btn-outline-dark mr-3" %>
@@ -69,6 +69,14 @@
       <% end %>
 
     <% end %>
+
+    <div class = "text-right mr-3 mb-4">
+      <%= form_tag(items_path, :method => 'get') do %>
+        <%= text_field_tag :search %>
+        <%= submit_tag 'Search', :name => nil %>
+      <% end %>
+    </div>
+
 
     <p class = "border-top" style="padding:10px;"></p>
 
