@@ -6,42 +6,42 @@
 
   <table class = "table table-borderless my-4">
     <tr>
-      <td>会員ID</td>
+      <th>会員ID</th>
       <td colspan="2"><%= @customer.id %></td>
     </tr>
 
     <tr>
-      <td>氏名</td>
+      <th>氏名</th>
       <td colspan="2"><%= @customer.last_name + " " + @customer.first_name %></td>
     </tr>
 
     <tr>
-      <td>フリガナ</td>
+      <th>フリガナ</th>
       <td colspan="2"><%= @customer.last_name_kana + " " + @customer.first_name_kana %></td>
     </tr>
 
     <tr>
-      <td>郵便番号</td>
+      <th>郵便番号</th>
       <td colspan="2"><%= @customer.postal_code %></td>
     </tr>
 
     <tr>
-      <td>住所</td>
+      <th>住所</th>
       <td colspan="2"><%= @customer.registered_address %></td>
     </tr>
 
     <tr>
-      <td>電話番号</td>
+      <th>電話番号</th>
       <td colspan="2"><%= @customer.telephone_number %></td>
     </tr>
 
     <tr>
-      <td>メールアドレス</td>
+      <th>メールアドレス</th>
       <td colspan="2"><%= @customer.email %></td>
     </tr>
 
     <tr>
-      <td>会員ステータス</td>
+      <th>会員ステータス</th>
 
       <% if @customer.is_active == true %>
         <td class = "text-success font-weight-bold">有効</td>
