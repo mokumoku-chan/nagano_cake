@@ -11,16 +11,18 @@ class Admin::OrdersController < ApplicationController
   def update
     order = Order.find(params[:id])
 
-    if order.update(order_params)
-      redirect_to admin_order_path(order)
+    order.update(order_params)
 
-    else
-      @order = Order.find(params[:id])
-      @order_items = OrderItem.where(order_id: @order.id)
+    if order.status == "confirm"
+      order_items = OrderItem.where(order_id: order.id)
 
-      render :show
+      order_items.each do |order_item|
+        order_item.update(production_status: 1)
+      end
+
     end
 
+    redirect_to admin_order_path(order)
   end
 
 
