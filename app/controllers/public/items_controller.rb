@@ -8,14 +8,15 @@ class Public::ItemsController < ApplicationController
 
 
     if  genre_id.nil?
-      @items = Item.page(params[:page]).search(params[:search])
-      @id = 0
+      @items = Item.page(params[:page]).search(params[:search]).where(is_active: "sale")
+      @page_id = 0
 
 
     else
-      @items = Item.page(params[:page]).where(genre_id: genre_id)
+      @items = Item.page(params[:page]).where(genre_id: genre_id, is_active: "sale")
       @genre = Genre.find(genre_id)
-      @id = 1
+      @page_id = 1
+
     end
 
   end

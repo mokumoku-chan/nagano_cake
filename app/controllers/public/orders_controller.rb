@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
 
 
     @customer = Customer.find(current_customer.id)
+    @address = Address.where(customer_id: current_customer.id)
 
   end
 
