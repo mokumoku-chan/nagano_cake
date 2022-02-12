@@ -1,0 +1,63 @@
+<div class = "container">
+
+  <div class = "row">
+    <h4 class = "font-weight-bold">商品編集</h4>
+  </div>
+
+  <%= form_with model:@item, url: admin_item_path(@item), local:true do |f| %>
+
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">商品画像</div>
+      <div class = "col-md-6">
+        <%= f.attachment_field :image %>
+      </div>
+    </div>
+
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">商品名</div>
+      <div class = "col-md-6">
+        <%= f.text_field :name, :size=>"40" %>
+      </div>
+    </div>
+
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">商品説明</div>
+      <div class = "col-md-6">
+        <%= f.text_area :introduction, :size=>"40" %>
+      </div>
+    </div>
+
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">ジャンル</div>
+      <div class = "col-md-6">
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, prompt: "--選択してください--" %>
+      </div>
+    </div>
+
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">税抜価格</div>
+      <div class = "col-md-6">
+        <%= f.text_field :price, :size=>"40" %>
+      </div>
+    </div>
+
+    <div class = "row mb-3">
+      <div class = "col-md-2 offset-md-2">販売ステータス</div>
+      <div class = "col-md-6">
+
+        <%= f.radio_button :is_active, :sale %>
+        <%= Item.is_actives_i18n[:sale] %>
+
+        <%= f.radio_button :is_active, :stop_selling %>
+        <%= Item.is_actives_i18n[:stop_selling] %>
+      </div>
+    </div>
+
+    <div class = "row mb-3">
+      <div class = "col-md-6 offset-md-4">
+        <%= f.submit "変更を保存", class: "btn btn-success mx-auto" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

@@ -1,0 +1,66 @@
+<% if @address.errors.any? %>
+  <%= @address.errors.count %>件のエラーが発生しました
+  <% @address.errors.full_messages.each do |address| %>
+    <%= address %>
+  <% end %>
+<% end %>
+
+
+
+<div class = "container">
+  <div class = "row">
+    <h4 class = "font-weight-bold mt-3 mb-4">配送先登録/一覧</h4>
+  </div>
+  
+  <%= form_with model:@address, local:true do |f| %>
+
+    <div class = "row">
+      <div class = "col-md-3"><%= f.label :postal_code, value: "郵便番号(ハイフンなし)" %></div>
+      <div class = "col-md-6">
+        <%= f.text_field :postal_code, :size=>"30" %>
+      </div>
+    </div>
+
+    <div class = "row my-3">
+      <div class = "col-md-3"><%= f.label :address, value: "住所" %></div>
+      <div class = "col-md-6">
+        <%= f.text_field :address, :size=>"70" %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-3"><%= f.label :name, value: "宛名" %></div>
+      <div class = "col-md-6"><%= f.text_field :name, :size=>"30" %></div>
+      <div class = "col-md-3"><%= f.submit "新規登録", class: "btn btn-success font-weight-bold" %></div>
+    </div>
+
+  <% end %>
+
+  <div class = "row">
+    <table class = "table table-bordered mt-5 mx-auto">
+      <thead class = "thead-light">
+        <tr>
+          <th>郵便番号</th>
+          <th>住所</th>
+          <th>宛名</th>
+          <th></th>
+        </tr>
+
+          <% @addresses.each do |address| %>
+
+            <tr>
+              <td><%= address.postal_code %></td>
+              <td><%= address.address %></td>
+              <td><%= address.name %></td>
+              <td>
+                <%= link_to "編集する", edit_address_path(address), class: "btn btn-success mr-2 font-weight-bold" %>
+                <%= link_to "削除する", address_path(address), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger font-weight-bold" %>
+              </td>
+            </tr>
+
+          <% end %>
+      </thead>
+    </table>
+  </div>
+
+</div>

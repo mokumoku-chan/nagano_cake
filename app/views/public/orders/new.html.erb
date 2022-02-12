@@ -1,0 +1,68 @@
+<div class = "container">
+  <div class = "row mt-3 mb-4"><h4 class = "font-weight-bold">注文情報入力</h4></div>
+
+  <%= form_with model:@order, url: confirm_orders_path, local:true do |f| %>
+
+    <%= f.label :payment_method, value: "支払方法", class: "font-weight-bold" %>
+
+    <div class = "ml-5">
+      <div class = "field">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:card] %>
+      </div>
+
+      <div class = "field">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:bank] %>
+      </div>
+    </div>
+
+    <%= f.label :select_address, value: "お届け先", class: "font-weight-bold" %>
+
+    <div class = "ml-5">
+        <%= f.radio_button :select_address, 0 %>
+        <%= f.label :select_address, value: "ご自身の住所" %>
+
+        <div class = "row mb-2">
+          <div class = "col offset-md-1">
+            〒<%= @customer.postal_code %>&nbsp;
+            <%= @customer.registered_address %>&nbsp;
+            <%= @customer.full_customer_name %>
+          </div>
+        </div>
+    </div>
+
+    <div class = "ml-5">
+      <%= f.radio_button :select_address, 1 %>
+      <%= f.label :select_address, value: "登録済み住所から選択" %>
+
+      <div class = "row mb-2">
+        <div class = "col offset-md-1"><%= f.select :address_id, options_from_collection_for_select(@address, :id, :full_address) %></div>
+      </div>
+    </div>
+
+
+    <div class = "ml-5">
+      <%= f.radio_button :select_address, 2 %>
+      <%= f.label :select_address, value: "新しいお届け先" %>
+
+      <div class = "row">
+        <div class = "col-md-3"><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></div>
+        <div class = "col-md-6"><%= f.text_field :postal_code, :size=>"30" %></div>
+      </div>
+
+      <div class = "row my-2">
+        <div class = "col-md-3"><%= f.label :address, "住所" %></div>
+        <div class = "col-md-6"><%= f.text_field :address, :size=>"60" %></div>
+      </div>
+
+      <div class =" row">
+        <div class = "col-md-3"><%= f.label :name, "宛名" %></div>
+        <div class = "col-md-6"><%= f.text_field :name, :size=>"30" %></div>
+      </div>
+    </div>
+
+    <div class = "text-center my-3"><%= f.submit "確認画面へ進む", class: "btn btn-primary font-weight-bold" %></div>
+  <% end %>
+
+</div>

@@ -1,0 +1,31 @@
+ja:
+  enums:
+    item:
+      is_active:
+        sale: '販売中'
+        stop_selling: '販売停止中'
+    customer:
+      is_active:
+        admission: '有効'
+        withdrawal: '退会'
+    order:
+      status:
+        waiting: '入金待ち'
+        confirm: '入金確認'
+        production: '製作中'
+        preparation: '発送準備中'
+        sent: '発送済み'
+      payment_method:
+        card: 'クレジットカード'
+        bank: '銀行振込'
+    order_item:
+      production_status:
+        impossible: '着手不可'
+        waiting: '製作待ち'
+        maiking: '製作中'
+        finish: '製作完了'
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%Y/%m/%d"
+
